@@ -1,0 +1,21 @@
+node_modules/
+dist/
+build/
+.next/
+*.tsbuildinfo
+.env
+.env.local
+.env*.local
+*.log
+.DS_Store
+.vercel
+.zeabur
+supabase/.temp/
+
+# 本地权限配置（每台机器不同）
+.claude/settings.local.json
+# 知识图谱产物：体积大、每次重建都变，保留在本地
+graphify-out/
+
+# MediaPipe assets are fetched by scripts/fetch-mediapipe-assets.sh (npm run setup:assets)
+public/mediapipe/

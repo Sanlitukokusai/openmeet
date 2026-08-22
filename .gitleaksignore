@@ -1,0 +1,5 @@
+# 历史提交中的误报豁免（fingerprint = commit:file:rule:line）
+# tests/webhooks/webhooks.test.ts 的 wrongSecret 是「验证错误签名被拒」用例里
+# 故意构造的假密钥，非真实凭据。当前代码已改写为不触发规则的形式；
+# 此指纹仅豁免 52f0a37 历史版本中的该行。
+52f0a37382626ccf0456be9006c0a1f99b4bc9d5:tests/webhooks/webhooks.test.ts:generic-api-key:178

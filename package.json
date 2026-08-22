@@ -1,0 +1,48 @@
+{
+  "name": "openmeet",
+  "version": "1.0.0",
+  "description": "Self-hosted browser-based video meetings built on LiveKit — blur/virtual backgrounds, chat, host mute controls, JA/ZH UI, and a swappable media provider layer.",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "vitest run",
+    "setup:assets": "bash scripts/fetch-mediapipe-assets.sh",
+    "postinstall": "bash scripts/fetch-mediapipe-assets.sh || true"
+  },
+  "dependencies": {
+    "@heroui/react": "2.7.11",
+    "@livekit/track-processors": "^0.7.2",
+    "@supabase/ssr": "^0.12.4",
+    "@supabase/supabase-js": "^2.111.0",
+    "bcryptjs": "^3.0.3",
+    "framer-motion": "^12.43.0",
+    "livekit-client": "^2.21.0",
+    "livekit-server-sdk": "^2.17.0",
+    "nanoid": "^6.0.0",
+    "next": "^15.5.22",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "server-only": "^0.0.1",
+    "zod": "^4.4.3",
+    "zustand": "^4.5.7"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.6",
+    "@heroui/theme": "2.4.17",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^22.20.1",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "autoprefixer": "^10.5.4",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^15.5.22",
+    "postcss": "^8.5.25",
+    "tailwindcss": "^3.4.19",
+    "typescript": "^5.6.3",
+    "vitest": "^4.1.10"
+  }
+}

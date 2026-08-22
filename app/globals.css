@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 系统字体栈：不引入任何远程字体（规格书 §8.1 大陆访问检查——被屏蔽域名的
+   字体请求会导致页面长时间挂起）。全部使用操作系统自带字体，覆盖中日文场景。
+   注意：本文件注释也不要写出被禁域名字样，否则会被 check-china-safe 误伤。 */
+@layer base {
+  html,
+  body {
+    font-family:
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      'Helvetica Neue',
+      Arial,
+      'PingFang SC',
+      'Hiragino Kaku Gothic ProN',
+      'Hiragino Sans',
+      'Noto Sans JP',
+      'Microsoft YaHei',
+      sans-serif;
+  }
+}
+
+/* セーフエリア（iOS ホームインジケータ／ノッチ）ユーティリティ。2026-08-14 実機フィードバック
+   （room 画面のコントロールドックが画面下端に貼り付いていた）を受けて追加。
+   app/layout.tsx の `viewport.viewportFit = 'cover'` とセットで効く——cover を付けない限り
+   env(safe-area-inset-*) は常に 0 なので、この 2 つは必ず両方揃える。
+   env() は非対応環境でも第 2 引数のフォールバックで 0px になる（安全に無条件で使える）。 */
+@layer utilities {
+  /* 既存のパディングが無い要素にそのまま足す用（ChatPanel / ParticipantsPanel の
+     モバイル全画面ドロワーなど）。既に同じ側の padding-top / padding-bottom を持つ
+     要素に重ねると二重宣言になるので使わないこと——組み合わせが要る箇所は
+     calc() をその場で書く。 */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .pt-safe {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  /* 画面下端に浮かぶコントロールドックの下端オフセット（既定 1rem + 安全区）。
+     モバイル・デスクトップ共通で無条件に使う（デスクトップでは env()=0 なので
+     従来の bottom-4 と見た目が一致し、md: で競合する上書き規則を持たない）。 */
+  .bottom-dock-safe {
+    bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  }
+  /* モバイル時のページングドット／矢印：ドックの少し上。この要素自体がモバイル
+     専用（デスクトップでは非表示コンポーネントごと出さない）なので、bottom に
+     対する md: の競合規則は存在しない。 */
+  .bottom-pager-safe {
+    bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px));
+  }
+  /* スクロールするページ（prejoin / join エントリー）の下端余白。2026-08-16 実機
+     フィードバック「iOS Safari で一番下のコントロールがツールバーに隠れて触れない」への対策。
+
+     ⚠️ なぜ safe-area だけでは足りないのか：iOS Safari の**浮動ツールバー**（下端の
+     アドレスバー／タブバー）は `env(safe-area-inset-bottom)` に一切算入されない。
+     安全区はノッチとホームインジケータのぶんしか教えてくれないので、ツールバーぶんは
+     こちらで「スクロールしきったときに最後の要素がツールバーより上に来る」余白として
+     積むしかない（ツールバーの高さは測れないため 7rem = 112px を経験値として固定）。
+     dvh 化（`min-h-dvh`）はビューポート高そのものを正しくするが、**ページ末尾の余白**は
+     別問題なのでこの 2 つは必ずセットで使う。
+     `py-*` と重ねると padding-bottom が二重宣言になるので、使う側は `pt-*` と組む。 */
+  .pb-scroll-safe {
+    padding-bottom: calc(7rem + env(safe-area-inset-bottom, 0px));
+  }
+}
