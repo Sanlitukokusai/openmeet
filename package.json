@@ -2,8 +2,28 @@
   "name": "openmeet",
   "version": "1.0.0",
   "description": "Self-hosted browser-based video meetings built on LiveKit — blur/virtual backgrounds, chat, host mute controls, JA/ZH UI, and a swappable media provider layer.",
+  "author": "三立国際合同会社",
   "license": "MIT",
   "private": false,
+  "homepage": "https://github.com/Sanlitukokusai/openmeet#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sanlitukokusai/openmeet.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Sanlitukokusai/openmeet/issues"
+  },
+  "keywords": [
+    "video-conferencing",
+    "webrtc",
+    "livekit",
+    "sfu",
+    "self-hosted",
+    "nextjs",
+    "virtual-background",
+    "supabase",
+    "meetings"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
